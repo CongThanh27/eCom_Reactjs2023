@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-
 function CallAPI() {
     var [dulieu, setData] = useState([]);
     const navigate = useNavigate()
@@ -41,8 +39,6 @@ function CallAPI() {
             {block}
         </div>
     </div>
-    </>
- 
-    
+    </>   
 }
 export default CallAPI;

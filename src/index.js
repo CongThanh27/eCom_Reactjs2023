@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { Home, Pay, CheckLogin, Layout, Login, Product } from "./Component";
+import { Home, Pay, CheckLogin, Layout, Login, Product, Detail } from "./Component";
+
 //import PrivateRouter from './Component/BaiTapBuoi6/PrivateRouter';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "login/",
     element: <Login />,
+  },
+  {
+    path: "detail/",
+    element: <Detail />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

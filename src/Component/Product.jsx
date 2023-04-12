@@ -58,9 +58,7 @@ export default function Product() {
                     <p>{dulieu.camera}</p>
                     <p>{dulieu.pin}</p>
                     <p>{dulieu.os}</p>
-                    <p>{dulieu.sim}</p>
-
-                
+                    <p>{dulieu.sim}</p>             
                     </div>
                 </div>
                 </div>
