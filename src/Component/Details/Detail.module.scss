@@ -7,17 +7,26 @@
     width: 81%;
     margin: auto;
 }
+
 .box_left {
     width: calc(100% - 490px);
     float: left;
 }
+.box_right {
+    width: 460px;
+    float: right;
+    margin-left: 30px;
+}
+
 .box01__tab {
     font-size: 0;
     text-align: center;
 }
+
 .scrolling_inner {
     position: relative;
 }
+
 .box01__tab .item {
     cursor: pointer;
     display: inline-block;
@@ -26,3 +35,11 @@
     vertical-align: top;
     width: 55px;
 }
+
+.productName {
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+}
+

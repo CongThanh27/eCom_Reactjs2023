@@ -19,11 +19,11 @@ function CallAPI() {
                 return (                     
                     <div class="col-2" key={item.id}>               
                             <div class="card"> 
-                                <Link to={`/product/${item.attributes.slug}`}>                           
+                                <Link to={`/detail/${item.attributes.slug}`}>                           
                                     <img src={`https://backoffice.nodemy.vn${item.attributes.image?.data[0].attributes.formats.thumbnail.url}`}  class="card-img-top" alt="..."/>
                                 </Link> 
                                 <div class="card-body">
-                                    <Link to={`/product/${item.attributes.slug}`}>
+                                    <Link to={`/detail/${item.attributes.slug}`}>
                                         <h6 class="text-truncate">{item.attributes.name}</h6>
                                         <p class="badge badge-danger">{item.attributes.price}đ</p>
                                     </Link>
