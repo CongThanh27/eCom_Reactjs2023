@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Home, Pay, CheckLogin, Layout, Login, Details } from "./Component";
-
 //import PrivateRouter from './Component/BaiTapBuoi6/PrivateRouter';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
