@@ -10,10 +10,12 @@ import Carousels from "./BoxLeft/Carousels";
 import BoxLeft from "./BoxLeft/BoxLeft";
 const cx = classname.bind(styles);
 const Rates = (rate) => <Rate disabled defaultValue={rate} character={<span style={{ fontSize: '15px' }}>★</span>} />;
-export default function Product() {
+export default function Details() {
     const { slug } = useParams()
+    
     var [dulieu, setData] = useState([]);
     
+
     useEffect(() => {
         axios.get('https://backoffice.nodemy.vn/api/products/' + slug + '?populate=*')
             .then((res) => {
@@ -25,6 +27,16 @@ export default function Product() {
 
     }, []);
 
+    var mycates = JSON.parse(localStorage.getItem("mycategory")) || [];
+    const cate = dulieu?.idCategories?.data[0].attributes?.slug;
+    
+    if (mycates.length > 3) {
+        mycates.shift();
+    }
+    if (/*!mycates.includes(cate) &&*/ cate != null ) {
+        mycates.push(cate);
+    }
+    localStorage.setItem("mycategory", JSON.stringify(mycates));
     // var mota = dulieu?.description?.split(".");
     // blockMota = mota?.map((item, index) => { return <p>{item}.</p> })
     const devider = {

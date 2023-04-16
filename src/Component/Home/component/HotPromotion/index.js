@@ -46,7 +46,7 @@ function HotPromotion() {
     return coupon < 0 ? `+${Math.abs(coupon)}%` : `-${Math.abs(coupon)}%`;
   }
 
-  function ItemGift(props) {
+  function HotPromotion(props) {
     const { item, index } = props;
     const restAPI = "https://backoffice.nodemy.vn";
     return (
@@ -61,6 +61,7 @@ function HotPromotion() {
             e.currentTarget.childNodes[0].style.transform = "scale(1.0)";
             e.currentTarget.childNodes[1].childNodes[0].style.color = "#000";
           }}
+          onClick={() => navigate(`/detail/${item.attributes.slug}`)}
           className={cx("item-gift")}
         >
           <Image
@@ -115,12 +116,12 @@ function HotPromotion() {
               <div
                 style={{
                   position: "absolute",
-                  top: "63%",
+                  top: "55%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   color: "black",
                   fontWeight: "100",
-                  fontSize: "0.65rem",
+                  fontSize: "0.8rem",
                   width: "100%",
                   textAlign: "center",
                 }}
@@ -153,7 +154,7 @@ function HotPromotion() {
                   <>
                     <div key={index} className={cx("content")}>
                       {item.map((item, index) => {
-                        return <ItemGift item={item} index={index} />;
+                        return <HotPromotion item={item} index={index} />;
                       })}
                     </div>
                   </>

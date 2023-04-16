@@ -19,10 +19,10 @@
 }
 
 .gift-current__text {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: "Roboto", sans-serif;
   color: #ffe818;
-  font-weight: 600;
+  font-weight: bold;
   flex: 3;
   text-align: center;
 }
@@ -36,7 +36,7 @@
 }
 
 .gift-current__time__title {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-family: "Roboto", sans-serif;
   color: #fff;
   margin: auto;
@@ -75,7 +75,7 @@
   align-items: center;
 
   .item-content__title {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     text-align: center;
     font-family: "Roboto", sans-serif;
     color: #000000;
@@ -101,7 +101,7 @@
 }
 
 .item-content__price > .price__new {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-family: "Roboto", sans-serif;
   color: #e32218;
   font-weight: 600;

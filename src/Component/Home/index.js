@@ -10,55 +10,14 @@ import {
   FeaturedProduct,
   HotPromotion,
   ForYou,
+  Trademark,
+  Blog,
 } from "./component";
 
 import { Carousel, Image } from "antd";
 
 const cx = classname.bind(styles);
 function Home() {
-  var [dulieu, setData] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    axios
-      .get("https://backoffice.nodemy.vn/api/products?populate=*")
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  console.log("data:", dulieu);
-  console.log("loai:", typeof dulieu);
-  var block = dulieu.map((item, index) => {
-    return (
-      <div className={cx("col-2")} key={item.id}>
-        <div className={cx("card")}>
-          <Link to={`/product/${item.attributes.slug}`}>
-            <img
-              src={`https://backoffice.nodemy.vn${item.attributes.image?.data[0].attributes.formats.thumbnail.url}`}
-              className={cx("card-img-top")}
-              alt="..."
-            />
-          </Link>
-          <div className={cx("card-body")}>
-            <Link to={`/product/${item.attributes.slug}`}>
-              <h6 className={cx("text-truncate")}>{item.attributes.name}</h6>
-              <p className={cx("badge badge-danger")}>
-                {item.attributes.price}
-              </p>
-            </Link>
-            <button
-              className={cx("btn btn-primary")}
-              onClick={() => navigate(`/pay/${item.id}`)}
-            >
-              Mua ngay
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  });
   return (
     <>
       <div className={cx("wrapper")}>
@@ -69,7 +28,8 @@ function Home() {
         <HotPromotion />
         <ImageCenter url="https://images.fpt.shop/unsafe/fit-in/1200x200/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/10/638167625985878860_F-H5_1200x200.png" />
         <ForYou />
-        <div className={cx("row")}>{block}</div>
+        <Trademark />
+        <Blog />
       </div>
     </>
   );
