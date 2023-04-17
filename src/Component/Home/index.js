@@ -34,7 +34,7 @@ function Home() {
     return (
       <div className={cx("col-2")} key={item.id}>
         <div className={cx("card")}>
-          <Link to={`/product/${item.attributes.slug}`}>
+          <Link to={`/detail/${item.attributes.slug}`}>
             <img
               src={`https://backoffice.nodemy.vn${item.attributes.image?.data[0].attributes.formats.thumbnail.url}`}
               className={cx("card-img-top")}
@@ -42,7 +42,7 @@ function Home() {
             />
           </Link>
           <div className={cx("card-body")}>
-            <Link to={`/product/${item.attributes.slug}`}>
+            <Link to={`/detail/${item.attributes.slug}`}>
               <h6 className={cx("text-truncate")}>{item.attributes.name}</h6>
               <p className={cx("badge badge-danger")}>
                 {item.attributes.price}

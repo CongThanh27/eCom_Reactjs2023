@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Home, Pay, CheckLogin, Layout, Login, Details } from "./Component";
 
-//import PrivateRouter from './Component/BaiTapBuoi6/PrivateRouter';
+
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
 import counterReducer from "./Component/slice/couterSlice";
@@ -39,11 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "pay/",
-        element: <Outlet />,
+        element:<CheckLogin><Outlet /></CheckLogin>  ,
         children: [
           {
             path: ":id",
-            element: <Pay />,
+            element:  <Pay /> ,
           },
         ],
       },
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "login/",
-    element: <Login />,
+    element: <Login /> ,
   },
  
 ]);
