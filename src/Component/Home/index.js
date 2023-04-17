@@ -10,6 +10,8 @@ import {
   FeaturedProduct,
   HotPromotion,
   ForYou,
+  Trademark,
+  Blog,
 } from "./component";
 
 import { Carousel, Image } from "antd";
@@ -59,6 +61,7 @@ function Home() {
       </div>
     );
   });
+
   return (
     <>
       <div className={cx("wrapper")}>
@@ -69,7 +72,8 @@ function Home() {
         <HotPromotion />
         <ImageCenter url="https://images.fpt.shop/unsafe/fit-in/1200x200/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/4/10/638167625985878860_F-H5_1200x200.png" />
         <ForYou />
-        <div className={cx("row")}>{block}</div>
+        <Trademark />
+        <Blog />
       </div>
     </>
   );

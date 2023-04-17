@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Home, Pay, CheckLogin, Layout, Login, Details } from "./Component";
-
-
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
 import counterReducer from "./Component/slice/couterSlice";
@@ -39,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "pay/",
-        element:<CheckLogin><Outlet /></CheckLogin>  ,
+        element:<CheckLogin> <Outlet /></CheckLogin>  ,
         children: [
           {
             path: ":id",

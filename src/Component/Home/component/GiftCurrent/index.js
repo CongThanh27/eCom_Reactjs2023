@@ -90,6 +90,7 @@ function GiftCurrent() {
             e.currentTarget.childNodes[0].style.transform = "scale(1.0)";
             e.currentTarget.childNodes[1].childNodes[0].style.color = "#000";
           }}
+          onClick={() => navigate(`/detail/${item.attributes.slug}`)}
           className={cx("item-gift")}
         >
           <Image
@@ -144,12 +145,12 @@ function GiftCurrent() {
               <div
                 style={{
                   position: "absolute",
-                  top: "63%",
+                  top: "55%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   color: "black",
                   fontWeight: "100",
-                  fontSize: "0.65rem",
+                  fontSize: "0.8rem",
                   width: "100%",
                   textAlign: "center",
                 }}
@@ -178,23 +179,20 @@ function GiftCurrent() {
     return listGift;
   }
 
-  console.log("listGift: ", GetListGift());
   return (
     <>
       <div className={cx("gift-current")}>
         <div className={cx("gift-current__title")}>
           <h2 className={cx("gift-current__text")}>QUÀ TẶNG ĐANG DIỄN RA</h2>
-          <RestTime rest={30} />
+          <RestTime rest={30}  />
         </div>
         <div className={cx("gift-current__content")}>
           <Carousel autoplay>
             {GetListGift().map((item, index) => {
-              console.log("item1111: ", item);
               return (
                 <>
                   <div key={index} className={cx("content")}>
                     {item.map((item, index) => {
-                      console.log("item222211: ", item, index);
                       return <ItemGift item={item} index={index} />;
                     })}
                   </div>
