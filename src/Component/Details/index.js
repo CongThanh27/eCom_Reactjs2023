@@ -33,7 +33,7 @@ export default function Details() {
     if (mycates.length > 3) {
         mycates.shift();
     }
-    if (/*!mycates.includes(cate) &&*/ cate != null ) {
+    if (!mycates.includes(cate) && cate != null ) {
         mycates.push(cate);
     }
     localStorage.setItem("mycategory", JSON.stringify(mycates));
