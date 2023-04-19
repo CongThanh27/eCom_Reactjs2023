@@ -78,11 +78,12 @@ function GiftCurrent() {
   function ItemGift(props) {
     const { item, index } = props;
     const restAPI = "https://backoffice.nodemy.vn";
+    // console.log("AAAAAA" + restAPI + item.attributes.image?.data[0].attributes.url);
     return (
       <>
         <div
           key={index}
-          onMouseEnter={(e) => {            
+          onMouseEnter={(e) => {
             e.currentTarget.childNodes[0].style.transform = "scale(1.1)";
             e.currentTarget.childNodes[1].childNodes[0].style.color = "#288ad6";
           }}
@@ -101,7 +102,11 @@ function GiftCurrent() {
             }}
             transition="12s easing"
             preview={false}
-            src={restAPI + item.attributes.image?.data[0].attributes.url}
+            src={
+              item.attributes.image?.data
+                ? restAPI + item.attributes.image.data[0].attributes.url
+                : "https://backoffice.nodemy.vn/uploads/r5_3050_1ca8d2e294ca4a3c8c875ac518beb714_large_4c8a4d705f.webp"
+            }
           />
           <div className={cx("item-content")}>
             <div className={cx("item-content__title")}>
@@ -184,7 +189,7 @@ function GiftCurrent() {
       <div className={cx("gift-current")}>
         <div className={cx("gift-current__title")}>
           <h2 className={cx("gift-current__text")}>QUÀ TẶNG ĐANG DIỄN RA</h2>
-          <RestTime rest={30}  />
+          <RestTime rest={30} />
         </div>
         <div className={cx("gift-current__content")}>
           <Carousel autoplay>

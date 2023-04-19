@@ -6,7 +6,8 @@ export default function Carousels({data}) {
       var imgArr = data?.image?.data?.map((item, index) => {
         return (                     
             <div style={contentStyle} class="carousel-item" data-bs-interval="2000">
-            <img style={contentStyle} src={`https://backoffice.nodemy.vn${item.attributes.url}`} class="d-block w-100" alt="..."/>
+            <img style={contentStyle} src={data?.image?.data
+                ? `https://backoffice.nodemy.vn${item.attributes.url}` : "https://backoffice.nodemy.vn/uploads/r5_3050_1ca8d2e294ca4a3c8c875ac518beb714_large_4c8a4d705f.webp"} class="d-block w-100" alt="..."/>
             </div>
        )
 })
@@ -14,7 +15,12 @@ export default function Carousels({data}) {
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div style={contentStyle} class="carousel-item active" data-bs-interval="2000">
-            <img style={contentStyle} src={`https://backoffice.nodemy.vn${data?.image?.data[0].attributes.url}`} class="d-block w-100" alt="..."/>
+         
+            <img style={contentStyle} src={
+              data?.image?.data
+                ? `https://backoffice.nodemy.vn${data?.image?.data[0].attributes.url}`
+                : "https://backoffice.nodemy.vn/uploads/r5_3050_1ca8d2e294ca4a3c8c875ac518beb714_large_4c8a4d705f.webp"
+            } class="d-block w-100" alt="..."/>
           </div>
             {imgArr}
         </div>

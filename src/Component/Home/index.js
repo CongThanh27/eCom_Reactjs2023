@@ -37,11 +37,11 @@ function Home() {
       <div className={cx("col-2")} key={item.id}>
         <div className={cx("card")}>
           <Link to={`/detail/${item.attributes.slug}`}>
-            <img
+            {/* <img
               src={`https://backoffice.nodemy.vn${item.attributes.image?.data[0].attributes.formats.thumbnail.url}`}
               className={cx("card-img-top")}
               alt="..."
-            />
+            /> */}
           </Link>
           <div className={cx("card-body")}>
             <Link to={`/detail/${item.attributes.slug}`}>

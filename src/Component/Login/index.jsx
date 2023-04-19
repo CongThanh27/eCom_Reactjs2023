@@ -102,7 +102,7 @@ export default function Login() {
                             <span></span>
                         </div> */}
           </div>
-          <button onClick={login}>Đăng nhập</button>
+          <button className={cx("loginbtn")}  onClick={login}>Đăng nhập</button>
           {/* <div className={cx('signup')}>
                             Already have an account?
                             <a href="#"> Signup</a>

@@ -72,7 +72,11 @@ function HotPromotion() {
             }}
             transition="12s easing"
             preview={false}
-            src={restAPI + item.attributes.image?.data[0].attributes.url}
+            src={
+              item.attributes.image?.data
+                ? restAPI + item.attributes.image.data[0].attributes.url
+                : "https://backoffice.nodemy.vn/uploads/laptop_gaming_acer_nitro_5_eagle_an515_57_5669_a1581d79b72e45239cf8ffaad2c866f4_large_a7ac93dab2.webp"
+            }
           />
           <div className={cx("item-content")}>
             <div className={cx("item-content__title")}>
@@ -147,8 +151,7 @@ function HotPromotion() {
         />
         <div className={cx("hotpromotion__content")}>
           <div className={cx("hotpromotion__wrapper")}>
-            <Carousel autoplay >
-              
+            <Carousel autoplay>
               {GetListGift().map((item, index) => {
                 return (
                   <>
