@@ -7,6 +7,7 @@ import styles from "./Model.module.scss";
 import classname from "classnames/bind";
 import { useSelector } from 'react-redux';
 import { setModeLogin } from "../../slice/couterSlice";
+import { margin } from '@mui/system';
 const cx = classname.bind(styles);
 const ModelLogin = () => {
     const dispatch = useDispatch();
@@ -44,19 +45,18 @@ const ModelLogin = () => {
                 console.log(JSON.stringify(response.data));
                 const user = JSON.stringify(response.data);
                 localStorage.setItem("user", user);
-                //chuyển dữ liệu lên store
                 dispatch(setUser(response.data.user));
                 handleOk();
             })
             .catch(function (error) {
                 console.log(error);
-                setErr("Sai tài khoản hoặc mật khẩu");
+                setErr("Thông tin không chính xác!!!");
                 showModal();
             });
     }
     return (
         <>
-            <Modal title="Login" open={isOpen} onOk={login} onCancel={handleCancel}>
+            <Modal className={cx("modelLogin")} title="Login" open={isOpen} onOk={login} onCancel={handleCancel}>
                 <div className={cx("")}>
                     <div className={cx("")}>
                         <div className={cx("")}>
@@ -68,7 +68,7 @@ const ModelLogin = () => {
                                         placeholder="Tài khoản"
                                         onChange={(e) => setUserName(e.target.value)}
                                     />
-                                    <div className={cx("error-input")}></div>                                  
+                                                                    
                                 </div>
                                 <div className={cx("input")}>
                                     <input

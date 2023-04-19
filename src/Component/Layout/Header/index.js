@@ -7,8 +7,6 @@ import avatar from "../../../images/newcv.jpg";
 import { useState, useEffect } from "react";
 
 import CheckLogin from "../../Login/CheckLogin/index";
-import logo from "../../../images/logo.svg";
-import avatar from "../../../images/newcv.jpg";
 import { useDispatch } from "react-redux";
 
 import ModelLogin from "../../Login/ModelLogin";
@@ -147,7 +145,7 @@ function Header() {
                   onClick={() => {
                     navigate("./login");
                   }}
-                >
+                > 
                   Đăng nhập
                 </span>
               )}
