@@ -1,14 +1,25 @@
 import styles from "./header.module.scss";
 import classname from "classnames/bind";
+
 import axios from "axios";
 import logo from "../../../images/logo.svg";
 import avatar from "../../../images/newcv.jpg";
 import { useState, useEffect } from "react";
+
+import CheckLogin from "../../Login/CheckLogin/index";
+import logo from "../../../images/logo.svg";
+import avatar from "../../../images/newcv.jpg";
+import { useDispatch } from "react-redux";
+
+import ModelLogin from "../../Login/ModelLogin";
+
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { Input, Space, message, Popconfirm, Select } from "antd";
 import { useNavigate, Link, useHistory } from "react-router-dom";
+import { setModeLogin } from "../../slice/couterSlice";
 const cx = classname.bind(styles);
 function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const text = "Bạn có muốn đăng xuất?";
   const confirm = () => {
@@ -38,6 +49,7 @@ function Header() {
 
   return (
     <>
+
       <div className={cx("wrapper")}>
         <div className={cx("inner")}>
           <div
@@ -97,7 +109,15 @@ function Header() {
             />
             <div
               onClick={() => {
-                navigate("./cart");
+                var userLocal = null
+                const userLocalCall = localStorage.getItem("user")
+                userLocal = JSON.parse(userLocalCall)
+                if (!userLocal) {
+                  dispatch(setModeLogin(true));                
+                }
+                else {
+                  navigate("./cart");
+                }
               }}
               className={cx("cart")}
             >

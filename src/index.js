@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import { Home, Pay, CheckLogin, Layout, Login, Details } from "./Component";
+import { Home, Pay, CheckLogin, Layout, Login, Details, Model } from "./Component";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
 import counterReducer from "./Component/slice/couterSlice";
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "login/",
     element: <Login /> ,
+  },
+  {
+    path: "model/",
+    element: < Model/> ,
   },
  
 ]);

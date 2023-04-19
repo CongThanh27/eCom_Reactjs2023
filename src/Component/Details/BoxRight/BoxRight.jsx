@@ -97,6 +97,7 @@ export default function BoxRight({ data }) {
                     </p>
                   </div>
                 </div>
+
                 <div class="divb t4">
                   <span class="nb">2</span>
                   <div class="divb-right">
@@ -168,6 +169,35 @@ export default function BoxRight({ data }) {
                 <p>
                   <span class="note">(*)</span> Giá hoặc khuyến mãi không áp
                   dụng trả góp lãi suất đặc biệt (0%, 0.5%, 1%)
+                </p>
+              </div>
+              <div className="block-button">
+                <Row className="row">
+                  <Col className="col" span={24}>
+                    <Link className="btn-buynow" to="/">
+                      MUA NGAY
+                    </Link>
+                  </Col>
+                </Row>
+                <Row className="row">
+                  <Col className="col" span={12}>
+                    <Link className="btn-left" to="/">
+                      MUA TRẢ GÓP
+                      <span>Duyệt hồ sơ trong 5 phút</span>
+                    </Link>
+                  </Col>
+                  <Col className="col" span={12}>
+                    <Link className="btn-right" to="/">
+                      TRẢ GÓP 0% QUA THẺ
+                      <span>Visa, Mastercard, JCB, Amex</span>
+                    </Link>
+                  </Col>
+                </Row>
+              </div>
+              <div className="">
+                <p class="callorder">
+                  Gọi đặt mua <a href="tel:0387102216">038.7102.216</a> (7:30 -
+                  22:00)
                 </p>
               </div>
             </div>
