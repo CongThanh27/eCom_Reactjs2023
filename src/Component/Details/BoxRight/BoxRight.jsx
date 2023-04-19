@@ -63,6 +63,7 @@ export default function BoxRight({ data }) {
             <div className="block-button">
                 <Row className='row'>
                     <Col className='col' span={24}>
+                        
                         <Link className='btn-buynow' to='/'>
                             MUA NGAY
                         </Link>

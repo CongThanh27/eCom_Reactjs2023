@@ -66,7 +66,9 @@ export default function Login() {
     <div className={cx("body")}>
       <div className={cx("wrapper")}>
         <h1>Đăng Nhập</h1>
-        <span></span>
+        <span>
+        <Text style={{color: "red"}}>{err}</Text>
+        </span>
         <div className={cx("form")}>
           <div className={cx("inputs")}>
             <div className={cx("input")}>

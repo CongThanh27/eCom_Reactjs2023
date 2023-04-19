@@ -12,13 +12,13 @@ import { render } from "@testing-library/react";
 const numeral = require("numeral");
 const cx = classname.bind(styles);
 function ForYou() {
-  var category = JSON.parse(localStorage.getItem("mycategory"));
+  var category = JSON.parse(localStorage.getItem("mycategory"))||[];
   var url =
     "https://backoffice.nodemy.vn/api/products?pagination[page]=1&pagination[pageSize]=4&sort[0]=price%3Aasc&sort[1]=name%3Aasc&filters[idCategories][slug][$contains]=";
   var [foryous, setforyous] = useState([]);
   const navigate = useNavigate();
 
-  console.log("cate"+ category[category.length - 1]);
+  //console.log("cate"+ category[category.length - 1]);
   useEffect(() => {
     axios
       .get(url + category[category.length - 1])
