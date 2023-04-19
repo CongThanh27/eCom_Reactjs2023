@@ -12,16 +12,17 @@ import { render } from "@testing-library/react";
 const numeral = require("numeral");
 const cx = classname.bind(styles);
 function ForYou() {
+
   var category = JSON.parse(localStorage.getItem("mycategory"))||[];
+
   var url =
-    "https://backoffice.nodemy.vn/api/products?pagination[page]=1&pagination[pageSize]=4&sort[0]=price%3Aasc&sort[1]=name%3Aasc&filters[idCategories][slug][$contains]=";
+    "https://backoffice.nodemy.vn/api/products?pagination[page]=1&pagination[pageSize]=4&sort[0]=price%3Aasc&sort[1]=name%3Aasc&";
   var [foryous, setforyous] = useState([]);
   const navigate = useNavigate();
 
-  //console.log("cate"+ category[category.length - 1]);
   useEffect(() => {
     axios
-      .get(url + category[category.length - 1])
+      .get(url + `filters[idCategories][slug][$in][0]=${category[0]}&filters[idCategories][slug][$in][1]=${category[1]}&filters[idCategories][slug][$in][2]=${category[2]}`)
       .then((res) => {
         setforyous(res.data.data);
         console.log(res.data.data);
@@ -31,6 +32,7 @@ function ForYou() {
       });
   }, []);
 
+  console.log(foryous);
   function GetCoupon(price, priceSale) {
     var coupon = 100 - Math.floor((price / priceSale) * 100);
     return coupon < 0 ? `+${Math.abs(coupon)}%` : `-${Math.abs(coupon)}%`;

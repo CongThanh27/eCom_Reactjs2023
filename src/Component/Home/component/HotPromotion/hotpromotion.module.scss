@@ -41,12 +41,16 @@
   align-items: center;
 
   .item-content__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     font-size: 1.2rem;
     text-align: center;
     font-family: "Roboto", sans-serif;
     color: #000000;
+    height: 4rem;
     font-weight: 100;
-    margin: 1% 0;
+    margin: auto
   }
 
   .item-content__price {

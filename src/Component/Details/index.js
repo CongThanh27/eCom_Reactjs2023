@@ -33,8 +33,13 @@ export default function Details() {
     if (mycates.length > 3) {
         mycates.shift();
     }
+<<<<<<< HEAD
     if (/*!mycates.includes(cate) &&*/ cate != null ) {
         mycates?.push(cate);
+=======
+    if (!mycates.includes(cate) && cate != null ) {
+        mycates.push(cate);
+>>>>>>> d1b309980a564789612f50e41d693ecb175d33a5
     }
     localStorage.setItem("mycategory", JSON.stringify(mycates));
     // var mota = dulieu?.description?.split(".");
