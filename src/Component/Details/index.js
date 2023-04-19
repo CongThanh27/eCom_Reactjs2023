@@ -71,11 +71,7 @@ export default function Details() {
         </div>
         <div className={cx("box_right")}>{<BoxRight data={dulieu} />}</div>
       </div>
-      <div className={cx("box_left")}>
-        <div className={cx("box_left_top")}>{<Carousels data={dulieu} />}</div>
-        <div className={cx("box_left_bottom")}>{<BoxLeft data={dulieu} />}</div>
-      </div>
-      <div className={cx("box_right")}>{<BoxRight data={dulieu} />}</div>
+      
     </>
   );
 }

@@ -15,18 +15,42 @@ export default function BoxRight({ data }) {
     return false;
   }
 
+  function checkCarts(pops) {
+    const { carts, user } = pops;
+    for (const cart of carts) {
+      if (cart.id === user.user.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function addCart() {
     const user = JSON.parse(localStorage.getItem("user"));
+    let carts = JSON.parse(localStorage.getItem("carts")) || [];
     console.log(user);
+
+    if (checkCarts({ carts, user })) {
+      for (const cart of carts) {
+        if (cart.id === user.user.id) {
+          cart.items.push(item);
+          break;
+        }
+      }
+    } else {
+      carts.push(cart);
+    }
+
     const cart = {
       id: user.user.id,
-      items: user.cart ? user.cart.items : [],
+      items: carts ? myCart.items : [],
     };
 
     var item = {
       id: data.slug,
       count: 1,
     };
+
     if (checkCart({ cart, item })) {
       for (const element of cart.items) {
         if (element.id === item.id) {
@@ -36,8 +60,8 @@ export default function BoxRight({ data }) {
     } else {
       cart.items.push(item);
     }
-    user.cart = cart;
-    localStorage.setItem("user", JSON.stringify(user));
+    carts.push(cart);
+    localStorage.setItem("carts", JSON.stringify(carts));
   }
 
   return (
@@ -97,108 +121,6 @@ export default function BoxRight({ data }) {
                     </p>
                   </div>
                 </div>
-
-                <div class="divb t4">
-                  <span class="nb">2</span>
-                  <div class="divb-right">
-                    <p>
-                      Mua kèm Laptop ưu đãi thêm (Tuỳ model và không kèm khuyến
-                      mãi khác của sản phẩm mua kèm):{" "}
-                    </p>
-                    <p class="circle ">
-                      Phụ kiện Apple: Giảm đến 50%.{" "}
-                      <a href="https://www.thegioididong.com/tin-tuc/phu-kien-apple-giam-gia-cuc-ngon-den-45-khi-mua-kem-1487686">
-                        {" "}
-                        Xem chi tiết
-                      </a>
-                    </p>
-                    <p class="circle ">
-                      Apple Watch: Giảm đến 27%.{" "}
-                      <a href="https://www.thegioididong.com/tin-tuc/apple-watch-mua-kem-giam-30-1481457">
-                        {" "}
-                        Xem chi tiết
-                      </a>
-                    </p>
-                    <p class="circle ">
-                      iPad: Giảm đến 50%.{" "}
-                      <a href="https://www.thegioididong.com/tin-tuc/ipad-129-inch-2021-giam-25-khi-mua-kem-iphone-13-pro-iphone-13-pro-max-1436136">
-                        {" "}
-                        Xem chi tiết
-                      </a>
-                    </p>
-                    <p class="circle ">
-                      Macbook: Giá chỉ từ 17.840.000đ.{" "}
-                      <a href="http://www.thegioididong.com/tin-tuc/macbook-giam-them-3-khi-mua-kem-iphone-ipad-apple-watch-1487450">
-                        {" "}
-                        Xem chi tiết
-                      </a>
-                    </p>
-                  </div>
-                </div>
-                <div class="divb t4">
-                  <span class="nb">3</span>
-                  <div class="divb-right">
-                    <p>
-                      Nhập mã MM30THANG4 giảm tối đa 100.000đ khi thanh toán qua
-                      MOMO
-                      <a
-                        href="http://www.thegioididong.com/tin-tuc/don-dai-le-ron-rang-nhap-ma-mm30thang4-giam-ngay-2-toi-da-100k-1523308"
-                        target="_blank"
-                      >
-                        (click xem chi tiết)
-                      </a>
-                    </p>
-                  </div>
-                </div>
-                <div class="divb t4">
-                  <span class="nb">4</span>
-                  <div class="divb-right">
-                    <p>
-                      Giảm 15% gói Bảo hiểm rơi vỡ{" "}
-                      <a
-                        href="http://www.thegioididong.com/tin-tuc/khuyen-mai-den-15-goi-bao-hiem-roi-vo-khi-mua-kem-iphone-ipad-macbook-apple-watch-1519626"
-                        target="_blank"
-                      >
-                        (click xem chi tiết)
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="pr-item text">
-                <p>
-                  <span class="note">(*)</span> Giá hoặc khuyến mãi không áp
-                  dụng trả góp lãi suất đặc biệt (0%, 0.5%, 1%)
-                </p>
-              </div>
-              <div className="block-button">
-                <Row className="row">
-                  <Col className="col" span={24}>
-                    <Link className="btn-buynow" to="/">
-                      MUA NGAY
-                    </Link>
-                  </Col>
-                </Row>
-                <Row className="row">
-                  <Col className="col" span={12}>
-                    <Link className="btn-left" to="/">
-                      MUA TRẢ GÓP
-                      <span>Duyệt hồ sơ trong 5 phút</span>
-                    </Link>
-                  </Col>
-                  <Col className="col" span={12}>
-                    <Link className="btn-right" to="/">
-                      TRẢ GÓP 0% QUA THẺ
-                      <span>Visa, Mastercard, JCB, Amex</span>
-                    </Link>
-                  </Col>
-                </Row>
-              </div>
-              <div className="">
-                <p class="callorder">
-                  Gọi đặt mua <a href="tel:0387102216">038.7102.216</a> (7:30 -
-                  22:00)
-                </p>
               </div>
             </div>
           </div>
@@ -236,7 +158,7 @@ export default function BoxRight({ data }) {
         </div>
         <div className="">
           <Text className="name-product" strong>
-            Cấu hình {data?.name}
+            Cấu hìnha {data?.name}
           </Text>
           <div class="parameter">
             <ul class="parameter__list 284139 active">

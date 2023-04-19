@@ -7,8 +7,6 @@ import avatar from "../../../images/newcv.jpg";
 import { useState, useEffect } from "react";
 
 import CheckLogin from "../../Login/CheckLogin/index";
-import logo from "../../../images/logo.svg";
-import avatar from "../../../images/newcv.jpg";
 import { useDispatch } from "react-redux";
 
 import ModelLogin from "../../Login/ModelLogin";
@@ -44,12 +42,10 @@ function Header() {
 
   function GetProductBySearch(props) {
     const { value, dulieu } = props;
-
   }
 
   return (
     <>
-
       <div className={cx("wrapper")}>
         <div className={cx("inner")}>
           <div
@@ -105,17 +101,15 @@ function Header() {
                 console.log(value, option);
                 navigate(`/product/${option.key}`);
               }}
-              
             />
             <div
               onClick={() => {
-                var userLocal = null
-                const userLocalCall = localStorage.getItem("user")
-                userLocal = JSON.parse(userLocalCall)
+                var userLocal = null;
+                const userLocalCall = localStorage.getItem("user");
+                userLocal = JSON.parse(userLocalCall);
                 if (!userLocal) {
-                  dispatch(setModeLogin(true));                
-                }
-                else {
+                  dispatch(setModeLogin(true));
+                } else {
                   navigate("./cart");
                 }
               }}
@@ -131,6 +125,7 @@ function Header() {
               {localStorage.getItem("user") ? (
                 <Popconfirm
                   placement="bottomRight"
+                  style={{ width: "100px" }}
                   title={text}
                   onConfirm={confirm}
                   okText="Có"
