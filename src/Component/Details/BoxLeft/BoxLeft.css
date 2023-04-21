@@ -27,3 +27,22 @@
     border-bottom: 1px solid #e0e0e0;
     margin: 0 ;
 }
+.description{
+    width: 100%;
+}
+.description__title{
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+}
+.description__content{
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-size: 19px!important;
+    
+
+}
+.description__content p img{
+    width: 100%;
+}
