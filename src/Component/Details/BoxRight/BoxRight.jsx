@@ -27,30 +27,17 @@ export default function BoxRight({ data }) {
 
   function addCart() {
     const user = JSON.parse(localStorage.getItem("user"));
-    let carts = JSON.parse(localStorage.getItem("carts")) || [];
+    let myCart = JSON.parse(localStorage.getItem("myCart"));
     console.log(user);
-
-    if (checkCarts({ carts, user })) {
-      for (const cart of carts) {
-        if (cart.id === user.user.id) {
-          cart.items.push(item);
-          break;
-        }
-      }
-    } else {
-      carts.push(cart);
-    }
-
     const cart = {
       id: user.user.id,
-      items: carts ? myCart.items : [],
+      items: myCart ? myCart.items : [],
     };
 
     var item = {
       id: data.slug,
       count: 1,
     };
-
     if (checkCart({ cart, item })) {
       for (const element of cart.items) {
         if (element.id === item.id) {
@@ -60,9 +47,11 @@ export default function BoxRight({ data }) {
     } else {
       cart.items.push(item);
     }
-    carts.push(cart);
-    localStorage.setItem("carts", JSON.stringify(carts));
+    myCart = cart;
+    localStorage.setItem("myCart", JSON.stringify(myCart));
   }
+
+
 
   return (
     <>

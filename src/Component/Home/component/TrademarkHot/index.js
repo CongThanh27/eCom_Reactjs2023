@@ -21,7 +21,7 @@ function Trademark() {
           {" "}
           {SetImageTrademark.map((item, index) => {
             return (
-              <div id={index} className={cx("trademark-current__content__item")}>
+              <div key={index} className={cx("trademark-current__content__item")}>
                 <Image
                   className={cx("trademark-current__content__item__img")}
                   src={item}

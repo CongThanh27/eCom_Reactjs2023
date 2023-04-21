@@ -195,13 +195,13 @@ function GiftCurrent() {
           <Carousel autoplay>
             {GetListGift().map((item, index) => {
               return (
-                <>
-                  <div key={index} className={cx("content")}>
+                <div key={index}>
+                  <div className={cx("content")}>
                     {item.map((item, index) => {
                       return <ItemGift item={item} index={index} />;
                     })}
                   </div>
-                </>
+                </div>
               );
             })}
           </Carousel>

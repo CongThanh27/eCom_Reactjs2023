@@ -71,7 +71,6 @@ export default function Details() {
         </div>
         <div className={cx("box_right")}>{<BoxRight data={dulieu} />}</div>
       </div>
-      
     </>
   );
 }

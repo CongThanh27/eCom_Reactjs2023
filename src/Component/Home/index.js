@@ -30,8 +30,7 @@ function Home() {
         console.log(err);
       });
   }, []);
-  console.log("data:", dulieu);
-  console.log("loai:", typeof dulieu);
+
   var block = dulieu.map((item, index) => {
     return (
       <div className={cx("col-2")} key={item.id}>

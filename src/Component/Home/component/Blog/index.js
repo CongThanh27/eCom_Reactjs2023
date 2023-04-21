@@ -28,7 +28,7 @@ function Blog() {
         <div className={cx("blog-current__content")}>
           {SetImageTrademark.map((item, index) => {
             return (
-              <div id={index} className={cx("blog-current__content__item")}>
+              <div key={index} className={cx("blog-current__content__item")}>
                 <Image
                   width="100%"
                   className={cx("blog-current__content__item__img")}

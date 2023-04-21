@@ -112,3 +112,19 @@ button:hover {
 .hide {
     display: none;
 }
+.modelLogin button{
+   width: 15%;
+   margin: 5px;
+}
+.modelLogin{
+    width: 100%;
+}
+.modelLogin div.ant-modal-footer{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+ }
+ .error-input{
+    padding: auto;
+ }
+ 

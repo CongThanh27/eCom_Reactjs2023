@@ -25,14 +25,12 @@ function ForYou() {
       .get(url + `filters[idCategories][slug][$in][0]=${category[0]}&filters[idCategories][slug][$in][1]=${category[1]}&filters[idCategories][slug][$in][2]=${category[2]}`)
       .then((res) => {
         setforyous(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  console.log(foryous);
   function GetCoupon(price, priceSale) {
     var coupon = 100 - Math.floor((price / priceSale) * 100);
     return coupon < 0 ? `+${Math.abs(coupon)}%` : `-${Math.abs(coupon)}%`;
@@ -56,7 +54,7 @@ function ForYou() {
     }, []);
 
     return (
-      <>
+  
         <div
           key={index}
           onMouseEnter={(e) => {
@@ -136,7 +134,6 @@ function ForYou() {
             </div>
           </div>
         </div>
-      </>
     );
   }
 

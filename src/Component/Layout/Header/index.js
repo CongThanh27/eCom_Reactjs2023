@@ -4,7 +4,7 @@ import classname from "classnames/bind";
 import axios from "axios";
 import logo from "../../../images/logo.svg";
 import avatar from "../../../images/newcv.jpg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import CheckLogin from "../../Login/CheckLogin/index";
 import { useDispatch } from "react-redux";
@@ -12,11 +12,16 @@ import { useDispatch } from "react-redux";
 import ModelLogin from "../../Login/ModelLogin";
 
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
-import { Input, Space, message, Popconfirm, Select } from "antd";
+import { Input, Space, message, Popconfirm, Select, AutoComplete } from "antd";
 import { useNavigate, Link, useHistory } from "react-router-dom";
+import _debounce from "lodash/debounce";
 import { setModeLogin } from "../../slice/couterSlice";
+import { Search } from "./components";
 const cx = classname.bind(styles);
+
+
 function Header() {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const text = "Bạn có muốn đăng xuất?";
@@ -24,25 +29,6 @@ function Header() {
     localStorage.removeItem("user");
     navigate("./login");
   };
-
-  const [dulieu, setDulieu] = useState([]);
-  const [value, setValue] = useState();
-
-  console.log(value);
-  useEffect(() => {
-    axios
-      .get("https://backoffice.nodemy.vn/api/products?populate=*")
-      .then((res) => {
-        setDulieu(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  function GetProductBySearch(props) {
-    const { value, dulieu } = props;
-  }
 
   return (
     <>
@@ -56,12 +42,7 @@ function Header() {
           >
             <img src={logo} alt="talkdaesk" />
           </div>
-          <div
-            className={cx("menu")}
-            onMouseEnter={() => {
-              console.log("Enter");
-            }}
-          >
+          <div className={cx("menu")}>
             <ul>Điện thoại</ul>
             <ul>Laptop</ul>
             <ul>Tablet</ul>
@@ -69,39 +50,8 @@ function Header() {
             <ul>Phụ kiện</ul>
           </div>
           <div className={cx("actions")}>
-            <Select
-              showSearch
-              value={value}
-              placeholder="Bạn cần tìm gì?"
-              style={{ width: "100%", flex: "5" }}
-              defaultActiveFirstOption={false}
-              showArrow={false}
-              filterOption={false}
-              onSearch={(newValue) => {
-                setValue(newValue);
-              }}
-              notFoundContent={null}
-              options={dulieu.map((item) => {
-                return {
-                  value: item.name,
-                  label: (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span>{item.name}</span>
-                      <span>{item.price}</span>
-                    </div>
-                  ),
-                };
-              })}
-              onSelect={(value, option) => {
-                console.log(value, option);
-                navigate(`/product/${option.key}`);
-              }}
-            />
+            <Search />
+          
             <div
               onClick={() => {
                 var userLocal = null;

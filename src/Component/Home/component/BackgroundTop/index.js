@@ -40,9 +40,9 @@ function BackgroundTop() {
       />
       <div className={cx("carousel")}>
         <Carousel autoplay>
-          {images.map((item) => {
+          {images.map((item, index) => {
             return (
-              <div className={cx("contain")}>
+              <div key={index} className={cx("contain")}>
                 <div className={cx("image")}>
                   <Image
                     width="45%"
