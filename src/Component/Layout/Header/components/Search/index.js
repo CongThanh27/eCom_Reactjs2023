@@ -5,11 +5,11 @@ import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 import Tippy from "@tippyjs/react";
 
-import { Input } from "antd";
+import { Input, Image } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import _debounce from "lodash/debounce";
-
+const numeral = require("numeral");
 function Search() {
   const cx = classname.bind(styles);
   const [dulieu, setDulieu] = useState([]);
@@ -40,6 +40,7 @@ function Search() {
       });
   }, [value]);
 
+  const restAPI = "https://backoffice.nodemy.vn";
   return (
     <>
       <Tippy
@@ -47,18 +48,43 @@ function Search() {
         onClickOutside={() => {
           setValue("");
         }}
-        render={value.length > 0 ? (attrs) => (
-          <div className={cx("search-dropdown")} tabIndex={-1} {...attrs}>
-            {" "}
-            {dulieu.map((item, index) => {
-              return (
-                <div key={index} className={cx("search-dropdown-item")}>
-                  {item.attributes.name}
+        render={
+          value.length > 0
+            ? (attrs) => (
+                <div className={cx("search-dropdown")} tabIndex={-1} {...attrs}>
+                  {" "}
+                  {dulieu.map((item, index) => {
+                    return (
+                      <div key={index} className={cx("search-dropdown-item")}>
+                        <Image
+                          width="40%"
+                          style={{
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                            margin: "1.5% 0",
+                          }}
+                          preview={false}
+                          src={
+                            restAPI +
+                            item.attributes.image?.data[0].attributes.url
+                          }
+                        />
+                        <div className={cx("content")}>
+                          <div className={cx("name")}>
+                            {item.attributes.name}{" "}
+                          </div>
+                          <div className={cx("price")}>
+                            {numeral(item.attributes.price).format("0,0")}
+                            <span>đ</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
-          </div>
-        ) : null}
+              )
+            : null
+        }
       >
         <div
           style={{
