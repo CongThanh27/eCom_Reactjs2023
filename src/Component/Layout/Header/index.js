@@ -5,7 +5,7 @@ import axios from "axios";
 import logo from "../../../images/logo.svg";
 import avatar from "../../../images/newcv.jpg";
 import { useState, useEffect, useCallback } from "react";
-
+import Tippy from "@tippyjs/react";
 import CheckLogin from "../../Login/CheckLogin/index";
 import { useDispatch } from "react-redux";
 
@@ -19,9 +19,7 @@ import { setModeLogin } from "../../slice/couterSlice";
 import { Search } from "./components";
 const cx = classname.bind(styles);
 
-
 function Header() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const text = "Bạn có muốn đăng xuất?";
@@ -51,7 +49,7 @@ function Header() {
           </div>
           <div className={cx("actions")}>
             <Search />
-          
+
             <div
               onClick={() => {
                 var userLocal = null;
@@ -73,20 +71,14 @@ function Header() {
             <div className={cx("account")}>
               <UserOutlined style={{ margin: "0px 3%", fontSize: "1rem" }} />
               {localStorage.getItem("user") ? (
-                <Popconfirm
-                  placement="bottomRight"
-                  style={{ width: "100px" }}
-                  title={text}
-                  onConfirm={confirm}
-                  okText="Có"
-                  cancelText="Không"
+                <span
+                  onClick={() => {
+                    localStorage.removeItem("user");
+                    navigate("./login");
+                  }}
                 >
-                  (
-                  <span>
-                    {JSON.parse(localStorage.getItem("user")).user.username}
-                  </span>
-                  )
-                </Popconfirm>
+                  {JSON.parse(localStorage.getItem("user")).user.username}
+                </span>
               ) : (
                 <span
                   onClick={() => {

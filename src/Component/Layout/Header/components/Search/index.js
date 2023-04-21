@@ -20,7 +20,7 @@ function Search() {
     setValue(inputValue);
   }
 
-  const debounceFn = useCallback(_debounce(handleDebounceFn, 1000), []);
+  const debounceFn = useCallback(_debounce(handleDebounceFn, 500), []);
 
   function handleChange(event) {
     const inputValue = event.target?.value;
@@ -45,6 +45,7 @@ function Search() {
     <>
       <Tippy
         visible={value.length > 0}
+        interactive
         onClickOutside={() => {
           setValue("");
         }}
@@ -55,7 +56,10 @@ function Search() {
                   {" "}
                   {dulieu.map((item, index) => {
                     return (
-                      <div key={index} className={cx("search-dropdown-item")}>
+                      <div key={index} onClick={() => {
+                        setValue("");
+                        navigate(`/detail/${item.attributes.slug}`)
+                      }} className={cx("search-dropdown-item")}>
                         <Image
                           width="40%"
                           style={{
