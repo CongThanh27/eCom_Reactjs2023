@@ -275,7 +275,6 @@ function TableCart() {
             <div
               style={{
                 color: "#ff4d4f",
-                fontWeight: "bold",
                 fontSize: "1.1rem",
               }}
             >
