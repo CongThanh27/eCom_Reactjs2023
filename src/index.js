@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import { Home, Pay, CheckLogin, Layout, Login, Details, Model } from "./Component";
+import { Home, Pay, CheckLogin, Layout, Login, Details, Model, Cart } from "./Component";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
 import counterReducer from "./Component/slice/couterSlice";
@@ -33,6 +33,12 @@ const router = createBrowserRouter([
             element: <Details />,
           },
         ],
+      },
+
+      {
+        path: "cart/",
+        element: <CheckLogin><Cart /></CheckLogin>,
+       
       },
       {
         path: "pay/",

@@ -7,6 +7,7 @@ const { Text } = Typography;
 export default function BoxRight({ data }) {
   function checkCart(pops) {
     const { cart, item } = pops;
+    
     for (const element of cart.items) {
       if (element.id === item.id) {
         return true;
@@ -15,20 +16,12 @@ export default function BoxRight({ data }) {
     return false;
   }
 
-  function checkCarts(pops) {
-    const { carts, user } = pops;
-    for (const cart of carts) {
-      if (cart.id === user.user.id) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   function addCart() {
     const user = JSON.parse(localStorage.getItem("user"));
-    let myCart = JSON.parse(localStorage.getItem("myCart"));
-    console.log(user);
+    const namecart = `myCart_${user.user.id}`;
+    var myCart = JSON.parse(localStorage.getItem(namecart));
+    
     const cart = {
       id: user.user.id,
       items: myCart ? myCart.items : [],
@@ -48,14 +41,14 @@ export default function BoxRight({ data }) {
       cart.items.push(item);
     }
     myCart = cart;
-    localStorage.setItem("myCart", JSON.stringify(myCart));
+    localStorage.setItem(namecart, JSON.stringify(myCart));
   }
 
 
 
   return (
     <>
-      <dir className="box-right">
+      <div className="box-right">
         <div className="">
           <Space direction="vertical" size="small">
             <Text className="name-product" strong>
@@ -224,7 +217,7 @@ export default function BoxRight({ data }) {
             </span>
           </div>
         </div>
-      </dir>
+      </div>
     </>
   );
 }
