@@ -4,6 +4,7 @@ import { Typography, Space, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import Buybtn from "../components/Buybtn";
 const { Text } = Typography;
+const numeral = require("numeral");
 export default function BoxRight({ data }) {
   function checkCart(pops) {
     const { cart, item } = pops;
@@ -55,9 +56,10 @@ export default function BoxRight({ data }) {
               {data?.name}
             </Text>
             <Space>
-              <Text className="box-price-old">{data?.oldPrice}₫</Text>
+              <Text className="box-price-old">{numeral(data?.oldPrice).format("0,0")}đ</Text>
               <Text strong className="box-price-present">
-                {data?.price}₫
+                
+                {numeral(data?.price).format("0,0")}đ
               </Text>
               <Text className="box-price-percent" type="danger">
                 -{(100 - (data?.oldPrice / data?.price) * 100).toFixed(0)}%

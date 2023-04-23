@@ -8,6 +8,8 @@ import { Rate } from "antd";
 import BoxRight from "./BoxRight/BoxRight";
 import Carousels from "./BoxLeft/Carousels";
 import BoxLeft from "./BoxLeft/BoxLeft";
+import SimilarProduct from "./SimilarProduct";
+import { useDispatch } from "react-redux"
 
 const cx = classname.bind(styles);
 const Rates = (rate) => (
@@ -18,20 +20,31 @@ const Rates = (rate) => (
   />
 );
 export default function Details() {
+  const dispatch = useDispatch();
   const { slug } = useParams();
 
   var [dulieu, setData] = useState([]);
-
+  //var [infoSPTT, setInfo] = useState();
+  var [info, setInfo] = useState({});
   useEffect(() => {
     axios
       .get("https://backoffice.nodemy.vn/api/products/" + slug + "?populate=*")
       .then((res) => {
+        setInfo({
+          id: res.data.data?.id,
+          ram: res.data.data?.attributes?.ram,
+          pricemin: parseInt(parseInt(res.data.data?.attributes?.price) - 1000000),
+          pricemax: parseInt(parseInt(res.data.data?.attributes?.price) + 1000000),
+          idCategories: res.data.data?.attributes?.idCategories?.data[0].attributes?.slug,
+        });
         setData(res.data.data.attributes);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+
 
   var mycates = JSON.parse(localStorage.getItem("mycategory")) || [];
   const cate = dulieu?.idCategories?.data[0].attributes?.slug;
@@ -70,51 +83,12 @@ export default function Details() {
           </div>
         </div>
         <div className={cx("box_right")}>{<BoxRight data={dulieu} />}</div>
+        <div>
+          <SimilarProduct info={info} />
+        </div>
+
       </div>
     </>
   );
 }
 
-// return <>
-//     <div class="container">
-//         <div class="row">
-//             <div class="col-lg-6">
-//             <img src={`https://backoffice.nodemy.vn${image}`}  class="img-fluid" alt="Product Image"/>
-//             </div>
-//             <div class="col-lg-6">
-//             <h2>{dulieu.name}</h2>
-//             <p>Brand: { brand} </p>
-//             <h3 class="badge badge-success" >Giá cũ: {dulieu.oldPrice}đ</h3>
-//             <h3 class="badge-danger" >{dulieu.price}đ</h3>
-//             <hr/>
-//             <p class ="text-success">{blockMota}</p>
-//             {dulieu.quantityAvailable="1"?(<p class ="text-primary">Số lượng còn lại: {dulieu.quantityAvailable}</p>) : (<p class ="text-danger">Số lượng còn lại: {dulieu.quantityAvailable}</p>) }
-//             <hr/>
-//             <form>
-//                 <div class="form-group">
-//                 <label for="quantity">Quantity:</label>
-//                 <input type="number" class="form-control" id="quantity" value="1"/>
-//                 </div>
-//                 <button type="submit" class="btn btn-primary">Add to Cart</button>
-//             </form>
-//             </div>
-//             <h4>Description</h4>
-//             <div class="container">
-//             <div class="row">
-//                 <div class="col-12">
-//                 <p>{blockMota}</p>
-//                 <p>CPU: {dulieu.cpu}</p>
-//                 <p>Ram: {dulieu.ram}</p>
-//                 <p>{dulieu.screen}</p>
-//                 <p>{dulieu.storage}</p>
-//                 <p>{dulieu.camera}</p>
-//                 <p>{dulieu.pin}</p>
-//                 <p>{dulieu.os}</p>
-//                 <p>{dulieu.sim}</p>
-//                 </div>
-//             </div>
-//             </div>
-//         </div>
-//     </div>
-
-// </>

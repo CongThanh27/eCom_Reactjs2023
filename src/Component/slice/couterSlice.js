@@ -5,6 +5,7 @@ const counterSlice = createSlice({
         count: 0,
         user: {},
         modelLogin: false,
+        info: {}
     },
     reducers: {
         setUser(state, action) {
@@ -13,9 +14,12 @@ const counterSlice = createSlice({
         setModeLogin(state, action) {
             state.modelLogin = action.payload;
             console.log(state.modelLogin);
+        },
+        setInfo(state, action) {
+            state.info = action.payload;
         }
 
     }
 });
-export const { setUser,setModeLogin } = counterSlice.actions;
+export const { setUser,setModeLogin,setInfo } = counterSlice.actions;
 export default counterSlice.reducer;
