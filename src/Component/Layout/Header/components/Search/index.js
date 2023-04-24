@@ -6,7 +6,7 @@ import { useState, useEffect, useCallback } from "react";
 import Tippy from "@tippyjs/react";
 
 import { Input, Image } from "antd";
-import { useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 import _debounce from "lodash/debounce";
 const numeral = require("numeral");

@@ -2,9 +2,12 @@ import { Button, notification, Space } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setModeLogin } from "../../../Component/slice/couterSlice";
 function Buybtn(pops) {
   const [api, contextHolder] = notification.useNotification();
   const { name, handleClick } = pops;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const close = () => {
     console.log(
@@ -55,8 +58,15 @@ function Buybtn(pops) {
           width: "100%",
         }}
         onClick={() => {
-          handleClick();
-          openNotification();
+          var userLocal = null;
+          const userLocalCall = localStorage.getItem("user");
+          userLocal = JSON.parse(userLocalCall);
+          if (!userLocal) {
+            dispatch(setModeLogin(true));
+          } else {
+            handleClick();
+            openNotification();
+          }
         }}
       >
         MUA NGAY

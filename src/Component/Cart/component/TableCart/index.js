@@ -124,7 +124,7 @@ function TableCart() {
                   style={{
                     fontSize: "1.1rem",
                   }}
-                >
+                  >
                   {record.name}
                 </div>
                 <div
@@ -184,8 +184,7 @@ function TableCart() {
                 flex : 1
               }}
                 disabled={
-                  record.count === 1 ||
-                  rowSelection.selectedRowKeys.includes(record.key)
+                  record.count === 1 || rowSelection.selectedRowKeys.includes(record.key)
                 }
                 onClick={() => {
                   const newData = [...data];

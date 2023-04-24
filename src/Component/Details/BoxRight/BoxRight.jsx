@@ -3,9 +3,13 @@ import { Typography, Space, Row, Col } from "antd";
 
 import { Link } from "react-router-dom";
 import Buybtn from "../components/Buybtn";
+import { useDispatch } from "react-redux";
+import { setModeLogin } from "../../slice/couterSlice";
+
 const { Text } = Typography;
 const numeral = require("numeral");
 export default function BoxRight({ data }) {
+  const dispatch = useDispatch();
   function checkCart(pops) {
     const { cart, item } = pops;
     
@@ -115,7 +119,7 @@ export default function BoxRight({ data }) {
               <Buybtn
                 name={data?.name}
                 handleClick={() => {
-                  addCart();
+                  addCart()                                                            
                 }}
               />
             </Col>
