@@ -1,4 +1,4 @@
-import { Button, Input, Table, Typography, Image } from "antd";
+import { Button, Input, Table, Typography, Image, message } from "antd";
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import styles from "./TableCart.module.scss";
@@ -13,11 +13,35 @@ function TableCart() {
   const cx = classname.bind(styles);
   const user = JSON.parse(localStorage.getItem("user"));
   const namecart = `myCart_${user.user.id}`;
+  const [code, setCode] = useState("");
+  const [discount, setDiscount] = useState(0);
   const product = localStorage.getItem(namecart)
     ? JSON.parse(localStorage.getItem(namecart)).items
     : [];
   const [data, setData] = useState([]);
 
+  // const [messageApi, contextHolder] = message.useMessage();
+  const info = (coupon) => {
+    message.info({
+      content: coupon,
+      duration: 1.5,
+    });
+  };
+
+  const coupon = [
+    {
+      code: "30thang4",
+      discount: 10,
+    },
+    {
+      code: "khuyenmaiT4",
+      discount: 20,
+    },
+    {
+      code: "DUCANH",
+      discount: 30,
+    },
+  ];
   let api = localStorage.getItem(namecart)
     ? "https://backoffice.nodemy.vn/api/products?populate=*"
     : "";
@@ -95,7 +119,7 @@ function TableCart() {
 
   const columns = [
     {
-      title: "Sản phẩm",
+      title: "Chọn tất cả sản phẩm",
       // chia độ rộng cột
       width: "45%",
       dataIndex: "name",
@@ -124,7 +148,7 @@ function TableCart() {
                   style={{
                     fontSize: "1.1rem",
                   }}
-                  >
+                >
                   {record.name}
                 </div>
                 <div
@@ -132,19 +156,23 @@ function TableCart() {
                     display: "flex",
                     justifyContent: "start",
                     flexDirection: "row",
-                    margin : "5px 0px"
+                    margin: "5px 0px",
                   }}
                 >
                   <Image
-                  preview={false}
-                    width={15}                    
+                    preview={false}
+                    width={15}
                     src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/91167e001db60b62d4f85c3e0ea919b6.png"
                   />
-                  <div style={{
-                    fontSize: "0.9rem",
-                    fontStyle: "italic",
-                    marginLeft: "5px",
-                  }}>7 Ngày Miễn Phí Trả Hàng</div>
+                  <div
+                    style={{
+                      fontSize: "0.9rem",
+                      fontStyle: "italic",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    7 Ngày Miễn Phí Trả Hàng
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,12 +183,18 @@ function TableCart() {
     {
       title: "Giá",
       dataIndex: "price",
-      
+
       render: (_) => {
         return {
-          children: <div style={{
-            fontSize: "1.1rem",
-          }}>{numeral(_).format("0,0")}đ</div>,
+          children: (
+            <div
+              style={{
+                fontSize: "1.1rem",
+              }}
+            >
+              {numeral(_).format("0,0")}đ
+            </div>
+          ),
         };
       },
     },
@@ -178,13 +212,13 @@ function TableCart() {
                 flexDirection: "row",
               }}
             >
-
               <Button
-               style={{
-                flex : 1
-              }}
+                style={{
+                  flex: 1,
+                }}
                 disabled={
-                  record.count === 1 || rowSelection.selectedRowKeys.includes(record.key)
+                  record.count === 1 ||
+                  rowSelection.selectedRowKeys.includes(record.key)
                 }
                 onClick={() => {
                   const newData = [...data];
@@ -227,9 +261,9 @@ function TableCart() {
                 {_}
               </div>
               <Button
-              style={{
-                flex : 1
-              }}
+                style={{
+                  flex: 1,
+                }}
                 disabled={rowSelection.selectedRowKeys.includes(record.key)}
                 onClick={() => {
                   const newData = [...data];
@@ -321,6 +355,10 @@ function TableCart() {
           }}
         >
           <Input
+            value={code}
+            onChange={(e) => {
+              setCode(e.target.value);
+            }}
             style={{
               width: "65%",
               marginRight: "1%",
@@ -329,6 +367,21 @@ function TableCart() {
             placeholder="Nhập mã giảm giá"
           />
           <Button
+            onClick={() => {
+              if (code === "") {
+                info(`Vui lòng nhập mã giảm giá`);
+                return;
+              }
+              coupon.map((item, index) => {
+                if (item.code === code) {
+                  setDiscount(item.discount / 100);
+                  info(`Áp dụng mã giảm giá ${item.discount}% thành công`);
+                  setCode("");
+                  return;
+                }
+              });
+              info(`Mã giảm giá không hợp lệ`);
+            }}
             style={{
               width: "25%",
               marginLeft: "1%",
@@ -355,7 +408,7 @@ function TableCart() {
               <div className={cx("total-price-total")}>
                 <div className={cx("total-price-contain-title")}>Giảm giá</div>
                 <div className={cx("total-price-contain-value")}>
-                  -{numeral(TongThanhToan()).format("0,0")}đ
+                  -{numeral(TongThanhToan() * discount).format("0,0")}đ
                 </div>
               </div>
               <span></span>
@@ -364,7 +417,10 @@ function TableCart() {
                   Tổng cộng
                 </div>
                 <div className={cx("total-price-contain-value-final")}>
-                  {numeral(TongThanhToan() - TongThanhToan()).format("0,0")}đ
+                  {numeral(TongThanhToan() - TongThanhToan() * discount).format(
+                    "0,0"
+                  )}
+                  đ
                 </div>
               </div>
             </div>
