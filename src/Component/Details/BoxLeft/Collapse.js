@@ -1,5 +1,5 @@
 import { Collapse } from 'antd';
-import React, { useState,  } from 'react';
+import React, { useState, } from 'react';
 import Markdown from './Markdown';
 
 const { Panel } = Collapse;
@@ -25,9 +25,15 @@ const App = ({ text }) => {
                             overflow: 'auto'//sẽ tự động hiển thị thanh cuộn nếu nội dung vượt quá chiều cao của div.
                         }}
                     >
-                        <Markdown text={text}  />
+                        <Markdown text={text} />
                     </div>
-                    <button onClick={toggleShowMore}>
+                    <button style={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                        color: "blue",
+                        fontSize: "16px",                      
+                        cursor: "pointer"
+                    }} onClick={toggleShowMore}>
                         {showMore ? 'See Less' : 'See More'}
                     </button>
 
