@@ -9,6 +9,7 @@ import { useInView } from 'react-intersection-observer';
 import Notifiction from "./Notification";
 const { Text } = Typography;
 const numeral = require("numeral");
+
 export default function BoxRight({ data }) {
   const buttonRef = useRef();
   const { ref: inViewRef, inView } = useInView();
@@ -24,7 +25,14 @@ export default function BoxRight({ data }) {
     return false;
   }
 
-
+  const handleButtonClick = () => {
+    window.scrollTo(0, 0);
+    const btnBuy = document.querySelector("#buybtn");
+    console.log(31,btnBuy);
+    if (btnBuy) {
+      btnBuy.classList.add("brighten");
+    }
+  };
   function addCart() {
     const user = JSON.parse(localStorage.getItem("user"));
     const namecart = `myCart_${user.user.id}`;
@@ -128,7 +136,7 @@ export default function BoxRight({ data }) {
               />
             </Col>
             {!inView && (
-              <Notifiction></Notifiction>       
+              <Notifiction onButtonClick={handleButtonClick}></Notifiction>
             )}
           </Row>
           <Row className="row">
