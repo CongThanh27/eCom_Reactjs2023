@@ -5,10 +5,17 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  //height: 100px;
+  // thanh cuộn
+  //overflow-y: scroll;
 }
-
+.infiniteScroll{
+  overflow-y: scroll;
+  height: 10px;
+}
 .search-dropdown-item {
   display: flex;
+  height: 80px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
