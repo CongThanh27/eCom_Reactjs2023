@@ -13,7 +13,7 @@ function ImageCenter(pops) {
         style={{
           objectFit: "cover",
           borderRadius: "10px",
-          margin: "1.5% 0",
+          margin: "0.5% 0",
         }}
         preview={false}
         src={url}
