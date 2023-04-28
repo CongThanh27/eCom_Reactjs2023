@@ -3,16 +3,19 @@ import { Typography, Space, Row, Col } from "antd";
 
 import { Link } from "react-router-dom";
 import Buybtn from "../components/Buybtn";
-import { useDispatch } from "react-redux";
-import { setModeLogin } from "../../slice/couterSlice";
 
+import React, { useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
+import Notifiction from "./Notification";
 const { Text } = Typography;
 const numeral = require("numeral");
 export default function BoxRight({ data }) {
-  const dispatch = useDispatch();
+  const buttonRef = useRef();
+  const { ref: inViewRef, inView } = useInView();
+
   function checkCart(pops) {
     const { cart, item } = pops;
-    
+
     for (const element of cart.items) {
       if (element.id === item.id) {
         return true;
@@ -26,7 +29,7 @@ export default function BoxRight({ data }) {
     const user = JSON.parse(localStorage.getItem("user"));
     const namecart = `myCart_${user.user.id}`;
     var myCart = JSON.parse(localStorage.getItem(namecart));
-    
+
     const cart = {
       id: user.user.id,
       items: myCart ? myCart.items : [],
@@ -62,7 +65,7 @@ export default function BoxRight({ data }) {
             <Space>
               <Text className="box-price-old">{numeral(data?.oldPrice).format("0,0")}đ</Text>
               <Text strong className="box-price-present">
-                
+
                 {numeral(data?.price).format("0,0")}đ
               </Text>
               <Text className="box-price-percent" type="danger">
@@ -115,14 +118,18 @@ export default function BoxRight({ data }) {
         </div>
         <div className="block-button">
           <Row className="row">
-            <Col className="col" span={24}>
+            <Col className="col" span={24} ref={inViewRef}>
               <Buybtn
+                ref={buttonRef}
                 name={data?.name}
                 handleClick={() => {
-                  addCart()                                                            
+                  addCart()
                 }}
               />
             </Col>
+            {!inView && (
+              <Notifiction></Notifiction>       
+            )}
           </Row>
           <Row className="row">
             <Col className="col" span={12}>

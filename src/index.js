@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import counterReducer from "./Component/slice/couterSlice";
 // Tao store
 import { configureStore } from "@reduxjs/toolkit";
-
+import Test from "./Test";
 const storeNodemy = configureStore({
   reducer: {
     counter: counterReducer,
@@ -59,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "model/",
     element: < Model/> ,
+  },
+  {
+    path: "test/",
+    element: < Test/> ,
   },
  
 ]);
