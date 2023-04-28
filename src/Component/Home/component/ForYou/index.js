@@ -57,81 +57,92 @@ function ForYou() {
     return (
       // <Item item={data} index={index} />
 
-      <div
-        key={index}
-        onMouseEnter={(e) => {
-          e.currentTarget.childNodes[0].style.transform = "scale(1.1)";
-          e.currentTarget.childNodes[1].childNodes[0].style.color = "#288ad6";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.childNodes[0].style.transform = "scale(1.0)";
-          e.currentTarget.childNodes[1].childNodes[0].style.color = "#000";
-        }}
-        onClick={() => navigate(`/detail/${data.slug}`)}
-        className={cx("item-foryou")}
-      >
-        <LazyLoadImage
-          height="200px"
-          style={{
-            backgroundColor: "red",
-            width: "98%",
+      data.length === 0 ? (
+        <div className={cx("item-foryou")}>
+          <Skeleton.Image style={{ width: "100" }}  active={true} />
+          <Skeleton
+            style={{ width: "100%", margin: "20% 0 0 0" }}
+            size="2rem"
+            active={true}
+          />
+        </div>
+      ) : (
+        <div
+          key={index}
+          onMouseEnter={(e) => {
+            e.currentTarget.childNodes[0].style.transform = "scale(1.1)";
+            e.currentTarget.childNodes[1].childNodes[0].style.color = "#288ad6";
           }}
-          effect="blur"
-          src={restAPI + data.image?.data[0].attributes.url}
-        />
+          onMouseLeave={(e) => {
+            e.currentTarget.childNodes[0].style.transform = "scale(1.0)";
+            e.currentTarget.childNodes[1].childNodes[0].style.color = "#000";
+          }}
+          onClick={() => navigate(`/detail/${data.slug}`)}
+          className={cx("item-foryou")}
+        >
+          <LazyLoadImage
+            height="200px"
+            style={{
+              backgroundColor: "red",
+              width: "98%",
+            }}
+            effect="blur"
+            src={restAPI + data.image?.data[0].attributes.url}
+          />
 
-        <div className={cx("item-content")}>
-          <div className={cx("item-content__title")}>{data.name}</div>
-          <div className={cx("item-content__price")}>
-            <div className={cx("price__new")}>
-              {numeral(data.price).format("0,0")}
-              <span>đ</span>
-            </div>
-            <div className={cx("price__old")}>
-              <div className={cx("price")}>
-                {numeral(data.oldPrice).format("0,0") + "đ"}
+          <div className={cx("item-content")}>
+            <div className={cx("item-content__title")}>{data.name}</div>
+            <div className={cx("item-content__price")}>
+              <div className={cx("price__new")}>
+                {numeral(data.price).format("0,0")}
+                <span>đ</span>
               </div>
-              <div className={cx("sale")}>
-                {GetCoupon(data.price, data.oldPrice)}
+              <div className={cx("price__old")}>
+                <div className={cx("price")}>
+                  {numeral(data.oldPrice).format("0,0") + "đ"}
+                </div>
+                <div className={cx("sale")}>
+                  {GetCoupon(data.price, data.oldPrice)}
+                </div>
               </div>
             </div>
-          </div>
-          <div style={{ position: "relative" }}>
-            <Progress
-              percent={(Math.floor(20 - data.quantityAvailable) * 100) / 20}
-              format={(percent) => `${(percent * 20) / 100}/20`}
-              status="active"
-              showInfo={false}
-              strokeWidth={25}
-              style={{
-                marginTop: "5%",
-                width: "200px",
-                opacity: "0.8",
-              }}
-              strokeColor={{
-                "0%": "yellow",
-                "100%": "red",
-              }}
-              trailColor="#dddddd"
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: "55%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                color: "black",
-                fontWeight: "100",
-                fontSize: "0.8rem",
-                width: "100%",
-                textAlign: "center",
-              }}
-            >
-              {`Đã bán ${20 - data.quantityAvailable}/20`}
+            <div style={{ position: "relative" }}>
+              <Progress
+                percent={(Math.floor(20 - data.quantityAvailable) * 100) / 20}
+                format={(percent) => `${(percent * 20) / 100}/20`}
+                status="active"
+                showInfo={false}
+                strokeWidth={25}
+                style={{
+                  marginTop: "5%",
+                  width: "200px",
+                  opacity: "0.8",
+                }}
+                strokeColor={{
+                  "0%": "yellow",
+                  "100%": "red",
+                }}
+                trailColor="#dddddd"
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "55%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "black",
+                  fontWeight: "100",
+                  fontSize: "0.8rem",
+                  width: "100%",
+                  textAlign: "center",
+                }}
+              >
+                {`Đã bán ${20 - data.quantityAvailable}/20`}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )
     );
   }
 

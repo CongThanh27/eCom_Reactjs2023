@@ -2,7 +2,9 @@ import styles from "./item.module.scss";
 import classname from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Progress } from "antd";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+import { Progress, Skeleton } from "antd";
 const numeral = require("numeral");
 const cx = classname.bind(styles);
 function Item(props) {

@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { Skeleton } from "antd";
 function TableCart() {
   const navigate = useNavigate();
   const numeral = require("numeral");
@@ -142,8 +143,13 @@ function TableCart() {
               <LazyLoadImage
                 src={record.image}
                 effect="blur"
-                style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  objectFit: "cover",
+                }}
               />
+
               <div style={{ marginLeft: "20px" }}>
                 <div
                   style={{
@@ -181,6 +187,7 @@ function TableCart() {
         };
       },
     },
+
     {
       title: "Giá",
       dataIndex: "price",

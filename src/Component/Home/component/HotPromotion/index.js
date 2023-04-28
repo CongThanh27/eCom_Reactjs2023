@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "animate.css";
 
-import { Carousel, Image, Progress } from "antd";
+import { Carousel, Image, Skeleton } from "antd";
 import { render } from "@testing-library/react";
 import { Item } from "../../../index";
 const numeral = require("numeral");
@@ -46,8 +46,6 @@ function HotPromotion() {
     return coupon < 0 ? `+${Math.abs(coupon)}%` : `-${Math.abs(coupon)}%`;
   }
 
-
-
   return (
     <>
       <div className={cx("hotpromotion")}>
@@ -60,19 +58,36 @@ function HotPromotion() {
         />
         <div className={cx("hotpromotion__content")}>
           <div className={cx("hotpromotion__wrapper")}>
-            <Carousel autoplay>
-              {GetListGift().map((item, index) => {
-                return (
-                  <>
-                    <div key={index} className={cx("content")}>
-                      {item.map((item, index) => {
-                        return <Item item={item} index={index} />;
-                      })}
+            {hots.length === 0 ? (
+              <div className={cx("content")}>
+                {[1, 2, 3, 4].map((item, index) => {
+                  return (
+                    <div className={cx("item-gift")}>
+                      <Skeleton.Image style={{ width: "100" }} active={true} />
+                      <Skeleton
+                        style={{ width: "100%", margin: "20% 0 0 0" }}
+                        size="2rem"
+                        active={true}
+                      />
                     </div>
-                  </>
-                );
-              })}
-            </Carousel>
+                  );
+                })}
+              </div>
+            ) : (
+              <Carousel autoplay>
+                {GetListGift().map((item, index) => {
+                  return (
+                    <>
+                      <div key={index} className={cx("content")}>
+                        {item.map((item, index) => {
+                          return <Item item={item} index={index} />;
+                        })}
+                      </div>
+                    </>
+                  );
+                })}
+              </Carousel>
+            )}
           </div>
         </div>
       </div>

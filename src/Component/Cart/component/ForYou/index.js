@@ -54,7 +54,16 @@ function ForYou() {
         });
     }, []);
 
-    return (
+    return data.length === 0 ? (
+      <div className={cx("item-foryou")}>
+        <Skeleton.Image height="400px" size="5rem" active={true} />
+        <Skeleton
+          style={{ width: "100%", margin: "20px 0" }}
+          size="2rem"
+          active={true}
+        />
+      </div>
+    ) : (
       <div
         key={index}
         onMouseEnter={(e) => {
@@ -146,8 +155,7 @@ function ForYou() {
   }
 
   return (
-    foryous.length === 0 ? <Skeleton height={400}  /> :
-     <>
+    <>
       <div className={cx("foryou-current")}>
         <div className={cx("foryou-current__title")}>Bạn có thể thích</div>
         <div className={cx("foryou-current__content")}>
@@ -155,9 +163,7 @@ function ForYou() {
             return (
               <div key={index} className={cx("content")}>
                 {item.map((item, index) => {
-                  return (
-                    <Itemforyou key={index} item={item} /> 
-                  );
+                  return <Itemforyou key={index} item={item} />;
                 })}
               </div>
             );

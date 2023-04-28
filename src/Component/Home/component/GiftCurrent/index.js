@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "animate.css";
 import { Item } from "../../../index";
-import { Carousel, Progress } from "antd";
-
+import { Carousel, Progress, Skeleton } from "antd";
 
 const numeral = require("numeral");
 const cx = classname.bind(styles);
@@ -70,12 +69,15 @@ function GiftCurrent() {
       <>
         <div className={cx("gift-current__time")}>
           <p className={cx("gift-current__time__title")}>Kết thúc sau</p>
-          <p className={cx("gift-current__time__title")}>{countdown}</p>
+          {countdown ? (
+            <p className={cx("gift-current__time__title")}>{countdown}</p>
+          ) : (
+            <Skeleton.Input active />
+          )}
         </div>
       </>
     );
   }
-
 
   function GetListGift() {
     //const { gifts } = props;
@@ -97,22 +99,39 @@ function GiftCurrent() {
       <div className={cx("gift-current")}>
         <div className={cx("gift-current__title")}>
           <h2 className={cx("gift-current__text")}>QUÀ TẶNG ĐANG DIỄN RA</h2>
-          <RestTime rest={30} />
+          <RestTime />
         </div>
         <div className={cx("gift-current__content")}>
-          <Carousel autoplay>
-            {GetListGift().map((item, index) => {
-              return (
-                <div key={index}>
-                  <div className={cx("content")}>
-                    {item.map((item, index) => {
-                      return <Item item={item} index={index} />;
-                    })}
+          {gifts.length === 0 ? (
+            <div className={cx("content")}>
+              {[1, 2, 3, 4].map((item, index) => {
+                return (
+                  <div className={cx("item-gift")}>
+                    <Skeleton.Image style={{ width: "100" }} active={true} />
+                    <Skeleton
+                      style={{ width: "100%", margin: "20% 0 0 0" }}
+                      size="2rem"
+                      active={true}
+                    />
                   </div>
-                </div>
-              );
-            })}
-          </Carousel>
+                );
+              })}
+            </div>
+          ) : (
+            <Carousel autoplay>
+              {GetListGift().map((item, index) => {
+                return (
+                  <div key={index}>
+                    <div className={cx("content")}>
+                      {item.map((item, index) => {
+                        return <Item item={item} index={index} />;
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </Carousel>
+          )}
         </div>
       </div>
     </>
