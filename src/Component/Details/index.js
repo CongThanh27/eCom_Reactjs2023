@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styles from "./detail.module.scss";
+import styles from "./Detail.module.scss";
 import classname from "classnames/bind";
 import Divider from "../Divider/index";
 import { Rate } from "antd";
