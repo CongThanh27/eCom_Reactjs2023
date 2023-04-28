@@ -6,6 +6,7 @@ import classname from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function TableCart() {
   const navigate = useNavigate();
@@ -138,9 +139,9 @@ function TableCart() {
                 flexDirection: "row",
               }}
             >
-              <Image
+              <LazyLoadImage
                 src={record.image}
-                preview={false}
+                effect="blur"
                 style={{ width: "100px", height: "100px", objectFit: "cover" }}
               />
               <div style={{ marginLeft: "20px" }}>
@@ -368,6 +369,7 @@ function TableCart() {
           />
           <Button
             onClick={() => {
+              let flag = false;
               if (code === "") {
                 info(`Vui lòng nhập mã giảm giá`);
                 return;
@@ -377,10 +379,12 @@ function TableCart() {
                   setDiscount(item.discount / 100);
                   info(`Áp dụng mã giảm giá ${item.discount}% thành công`);
                   setCode("");
-                  return;
+                  flag = true;
                 }
               });
-              info(`Mã giảm giá không hợp lệ`);
+              if (!flag) {
+                info(`Mã giảm giá không tồn tại`);
+              }
             }}
             style={{
               width: "25%",

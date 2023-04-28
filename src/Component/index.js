@@ -6,3 +6,4 @@ export { default as Pay } from "./Pay";
 export { default as CheckLogin } from "./Login/CheckLogin";
 export { default as Model } from "./Login/ModelLogin";
 export { default as Cart } from "./Cart";
+export { default as Item } from "./Item";
