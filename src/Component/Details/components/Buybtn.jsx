@@ -1,6 +1,6 @@
 import { Button, notification, Space } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
-
+import "./Buybtn.css"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setModeLogin } from "../../../Component/slice/couterSlice";
@@ -45,7 +45,7 @@ function Buybtn(pops) {
   return (
     <>
       {contextHolder}
-      <Button
+      <Button id="buybtn"
         style={{
           backgroundColor: "#fb6e2e",
           borderRadius: "6px",
